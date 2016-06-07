@@ -1,0 +1,8 @@
+{
+  "name": "hapi-todo-app",
+  "dependencies": {},
+  "globalDependencies": {
+    "hapi": "registry:dt/hapi#13.0.0+20160602125023",
+    "node": "registry:dt/node#6.0.0+20160602155235"
+  }
+}

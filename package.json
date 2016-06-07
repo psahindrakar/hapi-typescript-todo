@@ -1,0 +1,24 @@
+{
+  "name": "hapi-todo-app",
+  "version": "1.0.0",
+  "description": "Sample TODO app using hapi typescript",
+  "main": "./build/src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
+  },
+  "keywords": [
+    "hapi",
+    "typescript"
+  ],
+  "author": "Bitroots Software",
+  "license": "ISC",
+  "dependencies": {
+    "blipp": "2.3.0",
+    "gulp": "3.9.1",
+    "hapi": "13.4.1",
+    "hapi-swagger": "6.1.0",
+    "inert": "4.0.0",
+    "vision": "4.1.0"
+  }
+}

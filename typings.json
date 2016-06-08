@@ -2,7 +2,11 @@
   "name": "hapi-todo-app",
   "dependencies": {},
   "globalDependencies": {
+    "bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
     "hapi": "registry:dt/hapi#13.0.0+20160602125023",
-    "node": "registry:dt/node#6.0.0+20160602155235"
+    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
+    "node": "registry:dt/node#6.0.0+20160602155235",
+    "sequelize": "registry:dt/sequelize#3.4.1+20160606151038",
+    "validator": "registry:dt/validator#4.5.1+20160316155526"
   }
 }

@@ -13,7 +13,12 @@ server.connection({
 registerExtPlugins(server);
 registerIntPlugins(server);
 
- server.start((err) => {
-    if(err) console.log(err);
-    console.log(`Server is listing on ${server.info.uri}`);
-});
+console.log(server.plugins);
+
+// let db = server.plugins['hapi-sequelize'].db.sequelize;
+// db.sync().then(() => {
+    server.start((err) => {
+        if(err) console.log(err);
+        console.log(`Server is listing on ${server.info.uri}`);
+    });  
+// })

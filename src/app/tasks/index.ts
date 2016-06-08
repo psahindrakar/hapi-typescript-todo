@@ -1,12 +1,15 @@
 import * as Hapi from 'hapi';
 import { IHapiPlugin } from '../interfaces';
+import TaskController from './Task.controller';
 
 export default class TaskPlugin implements IHapiPlugin {
+  
+    private taskController = new TaskController();
     
     attributes = {
-         name: 'TasksPlugin',
+         name: 'task-manager',
          version: '1.0.0'
-    }
+    };
     
     registerPlugin(server: Hapi.Server) {
         server.register({
@@ -20,9 +23,7 @@ export default class TaskPlugin implements IHapiPlugin {
 
     register: any = (server: Hapi.Server, options: any, next: any) => {
         server.bind(this);
-        server.dependency(['hapi-swagger'], (server, next) => {
-            this.registerRoutes(server, next);
-        })
+        server.dependency([], this.registerRoutes(server, next));
         next();
     };
 
@@ -31,12 +32,7 @@ export default class TaskPlugin implements IHapiPlugin {
         server.route([{
             method: 'GET',
             path:'/{name}',
-            config: { 
-                handler: (request: Hapi.Request, reply: Hapi.IReply) => {
-                    reply(`hello ${request.params['name']}`);
-                },
-                tags: ['api']
-            }   
+            config: this.taskController.getTasks()
         }]);
         next();
     };

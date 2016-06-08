@@ -1,42 +1,42 @@
-// import * as Hapi from "hapi";
-// import TaskController from './Task.controller';
-// // import TaskRepository from '../libs/repository/mongo/taskRepository';
+import * as Hapi from 'hapi';
+import { IHapiPlugin } from '../interfaces';
 
-
-// export default register(server: Hapi.Server, options, ) {
-
-//     const taskController = new TaskController(server);
-
-//     server.route({
-//         method: 'GET',
-//         path: '/api/tasks',
-//         handler: undefined,
-//         config: taskController.getTasks()
-//     });
-// }
-
-export interface IRegister {
-    (server:any, options:any, next:any): void;
-    attributes?: any;
-}
-
-export default
-class Plugin {
-    constructor() {
+export default class TaskPlugin implements IHapiPlugin {
+    
+    registerPlugin(server: Hapi.Server) {
+        console.log('Registering TaskPlugin');
+        server.register({
+            register: this
+        });
+    }
+ 
+    constructor(server: Hapi.Server) {
         this.register.attributes = {
-            name: 'plugin',
-            version: '0.1.0'
+            name: 'TasksPlugin',
+            version: '1.0.0'
         };
     }
 
-    register:IRegister = (server, options, next) => {
+    register: any = (server: Hapi.Server, options: any, next: any) => {
         server.bind(this);
-        this._register(server, options);
+        server.dependency(['hapi-swagger'], (server, next) => {
+            this.registerRoutes(server, next);
+        })
         next();
     };
 
-    private _register(server, options) {
-        // Register
-        return 'register';
-    }
+    private registerRoutes: any = (server: Hapi.Server, next: any) => {
+        
+        server.route([{
+            method: 'GET',
+            path:'/{name}',
+            config: { 
+                handler: (request: Hapi.Request, reply: Hapi.IReply) => {
+                    reply(`hello ${request.params['name']}`);
+                },
+                tags: ['api']
+            }   
+        }]);
+        next();
+    };
 }

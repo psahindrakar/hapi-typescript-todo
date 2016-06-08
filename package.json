@@ -17,8 +17,11 @@
     "blipp": "2.3.0",
     "gulp": "3.9.1",
     "hapi": "13.4.1",
+    "hapi-sequelize": "2.2.4",
     "hapi-swagger": "6.1.0",
     "inert": "4.0.0",
+    "sequelize": "^3.23.3",
+    "sqlite3": "^3.1.4",
     "vision": "4.1.0"
   }
 }

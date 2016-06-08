@@ -3,6 +3,7 @@ import { IPlugin, IPluginInfo } from '../interfaces';
 
 const Inert = require('inert');
 const Vision = require('vision');
+const Blipp = require('blipp');
 const HapiSwagger = require('hapi-swagger');
 
 export default (): IPlugin => {
@@ -12,6 +13,7 @@ export default (): IPlugin => {
             server.register([
                 Inert,
                 Vision,
+                Blipp,
                 {
                     register: HapiSwagger,
                     options: {

@@ -23,7 +23,7 @@ export default class TaskPlugin implements IHapiPlugin {
 
     register: any = (server: Hapi.Server, options: any, next: any) => {
         server.bind(this);
-        server.dependency([], this.registerRoutes(server, next));
+        server.dependency(['hapi-sequelize'], this.registerRoutes(server, next));
         next();
     };
 
@@ -31,8 +31,12 @@ export default class TaskPlugin implements IHapiPlugin {
         
         server.route([{
             method: 'GET',
-            path:'/{name}',
+            path:'/tasks',
             config: this.taskController.getTasks()
+        }, {
+            method: 'POST',
+            path:'/tasks',
+            config: this.taskController.createTask()
         }]);
         next();
     };

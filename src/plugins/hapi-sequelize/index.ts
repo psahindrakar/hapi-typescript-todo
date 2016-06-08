@@ -13,7 +13,7 @@ export default (): IPlugin => {
                     options: {
                         name: 'TodoSqliteDb',                   
                         dialect: 'sqlite',
-                        models: '../../app/**/*.model.js',
+                        models: 'build/src/app/**/*.model.js',
                         storage: '../../todo-db.sqlite',
                         sequelize: {                          
                             define: {

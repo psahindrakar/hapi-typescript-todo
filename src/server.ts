@@ -15,10 +15,7 @@ registerIntPlugins(server);
 
 console.log(server.plugins);
 
-// let db = server.plugins['hapi-sequelize'].db.sequelize;
-// db.sync().then(() => {
-    server.start((err) => {
-        if(err) console.log(err);
-        console.log(`Server is listing on ${server.info.uri}`);
-    });  
-// })
+server.start((err) => {
+    if(err) console.log(err);
+    console.log(`Server is listing on ${server.info.uri}`);
+});

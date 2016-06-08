@@ -6,11 +6,26 @@ export default class TaskController {
         
     }
     
+    public createTask() {
+        return {
+            handler: (request: Hapi.Request, reply: Hapi.IReply) => {
+                let Task  = request.server.plugins['hapi-sequelize'].db.sequelize.models.Task;             
+                Task.create(request.payload).then((task) => {
+                    reply(task);
+                });
+            },
+            tags: ['api'],
+            description: 'Get a list of active tasks'
+        }
+    }
+    
     public getTasks() {
         return {
             handler: (request: Hapi.Request, reply: Hapi.IReply) => {
-                console.log(request.server.plugins['hapi-sequelize'].db.sequelize.models.Task);
-                reply('Tasks list');
+                let Task  = request.server.plugins['hapi-sequelize'].db.sequelize.models.Task;             
+                Task.find().then((tasks) => {
+                    reply(tasks);
+                });
             },
             tags: ['api'],
             description: 'Get a list of active tasks'

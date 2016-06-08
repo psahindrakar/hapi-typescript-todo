@@ -12,7 +12,6 @@ export default (server: Hapi.Server) => {
         
         console.log('Loading plugin', pluginName);
         let plugin: IPlugin = (require(pluginsPath + pluginName)).default();
-        console.log("ServerPlugin", plugin);
         console.log(`Registering plugin ${plugin.info().name} v${plugin.info().version}`);
         plugin.register(server);
     });  

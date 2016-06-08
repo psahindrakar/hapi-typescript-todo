@@ -3,18 +3,19 @@ import { IHapiPlugin } from '../interfaces';
 
 export default class TaskPlugin implements IHapiPlugin {
     
+    attributes = {
+         name: 'TasksPlugin',
+         version: '1.0.0'
+    }
+    
     registerPlugin(server: Hapi.Server) {
-        console.log('Registering TaskPlugin');
         server.register({
             register: this
         });
     }
  
     constructor(server: Hapi.Server) {
-        this.register.attributes = {
-            name: 'TasksPlugin',
-            version: '1.0.0'
-        };
+        this.register.attributes = this.attributes;
     }
 
     register: any = (server: Hapi.Server, options: any, next: any) => {

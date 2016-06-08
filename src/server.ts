@@ -15,6 +15,5 @@ registerIntPlugins(server);
 
  server.start((err) => {
     if(err) console.log(err);
-    console.log(server.plugins);
     console.log(`Server is listing on ${server.info.uri}`);
 });

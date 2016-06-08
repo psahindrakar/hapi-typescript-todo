@@ -9,9 +9,9 @@ export default (server: Hapi.Server) => {
     const plugins = fs.readdirSync(pluginsPath).filter(file => fs.statSync(path.join(pluginsPath, file)).isDirectory());
     plugins.forEach((pluginName: string) => {
         
-        console.log('Loading plugin', pluginsPath + pluginName);
+        console.log('Loading plugin', pluginName);       
         let plugin: IHapiPlugin = new (require(pluginsPath + pluginName)).default(server);
-        console.log('Plugin ', plugin);
+        console.log(`Registering plugin ${plugin.attributes.name} v${plugin.attributes.version}`); 
         plugin.registerPlugin(server);
     });  
 }

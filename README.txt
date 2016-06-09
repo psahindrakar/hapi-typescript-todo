@@ -24,3 +24,8 @@ npm install --save sqlite3
 Received validation errors on Hapi-sequelize with latest version 3.0.x. Changed it to 2.2.4 in package.json and npm install. Now it works.
 
 npm install gulp-lab --save-dev 
+
+https://medium.com/@thedon/how-test-your-hapi-api-with-lab-b72f6e8ed641#.2o9hbgf48
+https://www.rallydev.com/blog/engineering/testing-hapi-using-jasmine
+
+npm install --save boom confidence glue

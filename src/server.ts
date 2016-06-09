@@ -1,21 +1,57 @@
 /// <reference path="../typings/index.d.ts" />
 
 import * as Hapi from 'hapi';
-import registerExtPlugins from './plugins';
-import registerIntPlugins from './app';
+import Manifest from './config/manifest';
 
-const server: Hapi.Server = new Hapi.Server();
+import taskplugin from './app/tasks';
 
-server.connection({ 
-    port : 9001 
+console.log(taskplugin);
+
+// import registerExtPlugins from './plugins';
+// import registerIntPlugins from './app';
+
+const Glue = require('glue');
+
+const composeOptions = {
+    relativeTo: __dirname + '/../src'
+}
+
+Glue.compose(new Manifest().get("/"), composeOptions, function(err, server) {
+    if(err) throw err; 
+    
+    server.start((err) => {
+        if(err) return console.log(err);
+        console.log(`Server is listing for api on ${server.connections[0].info.uri}`);
+        console.log(`Server is listing for doc on ${server.connections[1].info.uri}`);
+    });
 });
 
-registerExtPlugins(server);
-registerIntPlugins(server);
+// export default () => {
+//     return Glue.compose(manifest, composeOptions, function(err, server) {
+//         server.start((err) => {
+//             if(err) console.log(err);
+//                 console.log(`Server is listing on ${server.info.uri}`);
+//         });
+        
+//         return server;
+//     });
+// }
 
-server.start((err) => {
-    if(err) console.log(err);
-    console.log(`Server is listing on ${server.info.uri}`);
-});
 
-export default server;
+
+
+// const server: Hapi.Server = new Hapi.Server();
+
+// server.connection({ 
+//     port : 9001 
+// });
+
+// // registerExtPlugins(server);
+// // registerIntPlugins(server);
+
+// server.start((err) => {
+//     if(err) console.log(err);
+//     console.log(`Server is listing on ${server.info.uri}`);
+// });
+
+// export default server;

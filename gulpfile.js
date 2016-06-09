@@ -54,4 +54,4 @@ gulp.task('test:api', ['build'], function () {
       .pipe(lab());
 });
 
-gulp.task('default', ['test','nodemon', 'watch']);
+gulp.task('default', ['nodemon', 'watch']);

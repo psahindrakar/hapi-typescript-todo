@@ -15,6 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "blipp": "2.3.0",
+    "boom": "^3.2.1",
+    "confidence": "^3.0.0",
+    "glue": "^3.3.0",
     "hapi": "13.4.1",
     "hapi-sequelize": "2.2.4",
     "hapi-swagger": "6.1.0",

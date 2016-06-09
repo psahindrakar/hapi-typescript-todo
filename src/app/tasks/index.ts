@@ -2,42 +2,32 @@ import * as Hapi from 'hapi';
 import { IHapiPlugin } from '../interfaces';
 import TaskController from './Task.controller';
 
-export default class TaskPlugin implements IHapiPlugin {
-  
-    private taskController = new TaskController();
-    
-    attributes = {
-         name: 'task-manager',
-         version: '1.0.0'
-    };
-    
-    registerPlugin(server: Hapi.Server, callback) {
-        this.register.attributes = this.attributes;
-        server.register({
-            register: this
-        }, (err) => {
-            if(err) { return callback(err); } 
-            return callback();
-        });
+const taskController = new TaskController();
+
+class TaskPlugin {
+    constructor() {
+        this.register.attributes = {
+            name: 'task-manager',
+            version: '1.0.0'    
+        }
     }
-
-    register: any = (server: Hapi.Server, options: any, next: any) => {
+    
+    register: IHapiPlugin = (server, options, next) => {
         server.bind(this);
-        server.dependency(['hapi-sequelize'], this.registerRoutes(server, next));
-        next();
-    };
-
-    private registerRoutes: any = (server: Hapi.Server, next: any) => {
+        // server.dependency(['hapi-sequelize'], this.registerRoutes(server, next));
         
         server.route([{
             method: 'GET',
             path:'/tasks',
-            config: this.taskController.getTasks()
+            config: taskController.getTasks()
         }, {
             method: 'POST',
             path:'/tasks',
-            config: this.taskController.createTask()
+            config: taskController.createTask()
         }]);
+
         next();
-    };
+    }
 }
+
+export = new TaskPlugin();

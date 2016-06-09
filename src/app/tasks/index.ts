@@ -11,14 +11,14 @@ export default class TaskPlugin implements IHapiPlugin {
          version: '1.0.0'
     };
     
-    registerPlugin(server: Hapi.Server) {
+    registerPlugin(server: Hapi.Server, callback) {
+        this.register.attributes = this.attributes;
         server.register({
             register: this
+        }, (err) => {
+            if(err) { return callback(err); } 
+            return callback();
         });
-    }
- 
-    constructor(server: Hapi.Server) {
-        this.register.attributes = this.attributes;
     }
 
     register: any = (server: Hapi.Server, options: any, next: any) => {

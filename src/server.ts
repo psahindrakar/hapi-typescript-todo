@@ -13,9 +13,9 @@ server.connection({
 registerExtPlugins(server);
 registerIntPlugins(server);
 
-console.log(server.plugins);
-
 server.start((err) => {
     if(err) console.log(err);
     console.log(`Server is listing on ${server.info.uri}`);
 });
+
+export default server;

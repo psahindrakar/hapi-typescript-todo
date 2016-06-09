@@ -23,7 +23,7 @@ export default class TaskController {
         return {
             handler: (request: Hapi.Request, reply: Hapi.IReply) => {
                 let Task  = request.server.plugins['hapi-sequelize'].db.sequelize.models.Task;             
-                Task.find().then((tasks) => {
+                Task.findAll().then((tasks) => {
                     reply(tasks);
                 });
             },

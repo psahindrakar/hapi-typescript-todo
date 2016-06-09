@@ -12,8 +12,7 @@ typings init
 typings install dt~hapi --global --save
 typings install dt~node --global --save
 configured clean build task
-npm install gulp-typescript gulp-rimraf gulp-sourcemaps --dev-save
-npm install gulp-nodemon --dev-save
+npm install gulp-typescript gulp-rimraf gulp-sourcemaps gulp-nodemon --save-dev 
 
 http://blog.hobbytrace.com/using-sequelize-with-express-js-in-typescript/
 Adding sequelize typings
@@ -22,4 +21,6 @@ typings install dt~sequelize dt~bluebird dt~lodash --save --global
 Using sqlite as database
 npm install --save sqlite3
 
-Received validation errors on Hapi-sequelize with latest version 3.0.x. Changed it to 2.2.4 in package.json and npm install. Now it works. 
+Received validation errors on Hapi-sequelize with latest version 3.0.x. Changed it to 2.2.4 in package.json and npm install. Now it works.
+
+npm install gulp-lab --save-dev 

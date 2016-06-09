@@ -5,6 +5,7 @@ let rimraf = require('gulp-rimraf');
 let sourceMaps = require('gulp-sourcemaps');
 let tsc = require('gulp-typescript');
 let nodemon = require('gulp-nodemon');
+var lab = require('gulp-lab');
 
 // Variables
 let tsProject = tsc.createProject('tsconfig.json');
@@ -12,6 +13,8 @@ let sourceFiles = 'src/**/*.ts';
 let testFiles = 'test/**/*.ts';
 let outDir = require('./tsconfig.json').compilerOptions.outDir;
 let entryPoint = require('./package.json').main;
+let testUnitFiles = 'build/test/unit/**/*.js';
+let testFunctionalFiles = 'build/test/functional/**/*.js';
 
 gulp.task('clean', function() {
     return gulp.src(outDir, { read : false }).pipe(rimraf()); 
@@ -38,5 +41,17 @@ gulp.task('nodemon', ['build'], () => {
         env: { 'NODE_ENV': 'development' }
     });
 });
+ 
+gulp.task('test', ['test:unit', 'test:api']);
 
-gulp.task('default', ['nodemon', 'watch']);
+gulp.task('test:unit', ['build'], function () {
+    return gulp.src([testUnitFiles])
+      .pipe(lab());
+});
+
+gulp.task('test:api', ['build'], function () {
+    return gulp.src([testFunctionalFiles])
+      .pipe(lab());
+});
+
+gulp.task('default', ['test','nodemon', 'watch']);

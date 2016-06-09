@@ -10,8 +10,10 @@ export default (server: Hapi.Server) => {
     plugins.forEach((pluginName: string) => {
         
         console.log('Loading plugin', pluginName);       
-        let plugin: IHapiPlugin = new (require(pluginsPath + pluginName)).default(server);
+        let plugin: IHapiPlugin = new (require(pluginsPath + pluginName)).default();
         console.log(`Registering plugin ${plugin.attributes.name} v${plugin.attributes.version}`); 
-        plugin.registerPlugin(server);
+        plugin.registerPlugin(server, (err) => {
+            if(err) throw err;
+        });
     });  
 }

@@ -18,7 +18,7 @@ const composeOptions = {
 }
 
 class ApiServer {
-    private static apiServer = undefined;
+    private static apiServer;
     
     public static getServer(callback) {
         
@@ -41,13 +41,8 @@ lab.experiment('Simple', () => {
         
         ApiServer.getServer((server) => {                                    
             server.inject({
-                method: 'POST',
-                url: '/api/v1/tasks',
-                payload: {
-                    "title": "task1",
-                    "description": "Needs to be done",
-                    "status": false,
-                }
+                method: 'GET',
+                url: '/api/v1/tasks'
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);

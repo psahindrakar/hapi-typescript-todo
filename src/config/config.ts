@@ -28,7 +28,18 @@ const config = {
             
         },
         test: {
-            
+            sqlite: {
+                name: 'TodoSqliteDb',                   
+                dialect: 'sqlite',
+                models: 'build/src/app/**/*.model.js',
+                storage: '../../todo-db.sqlite',
+                sequelize: {                          
+                    define: {
+                        underscoredAll: true,
+                        timestamps: true                             
+                    }
+                }   
+            }
         },
         $default: {
             sqlite: {

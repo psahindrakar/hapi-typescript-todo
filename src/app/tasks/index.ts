@@ -12,10 +12,7 @@ class TaskPlugin {
         }
     }
     
-    register: IHapiPlugin = (server, options, next) => {
-        server.bind(this);
-        // server.dependency(['hapi-sequelize'], this.registerRoutes(server, next));
-        
+    private registerRoutes(server, next) {
         server.route([{
             method: 'GET',
             path:'/tasks',
@@ -25,7 +22,11 @@ class TaskPlugin {
             path:'/tasks',
             config: taskController.createTask()
         }]);
-
+    }
+    
+    register: IHapiPlugin = (server, options, next) => {
+        server.bind(this);
+        server.dependency(['hapi-sequelize'], this.registerRoutes(server, next));
         next();
     }
 }

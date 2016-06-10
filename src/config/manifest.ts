@@ -62,6 +62,12 @@ const manifest = {
             }
         },
         {
+            plugin: './app/auth',
+            options: {
+                select: [apiLabel]
+            }
+        },
+        {
             plugin: './app/tasks',
             options: {
                 select: [apiLabel],

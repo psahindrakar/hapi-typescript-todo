@@ -51,6 +51,7 @@ lab.experiment('Simple', () => {
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);
+                Code.expect(response.result).to.be.an.object();
                 done();
             });
         });
@@ -60,16 +61,63 @@ lab.experiment('Simple', () => {
         
         ApiServer.getServer((server) => {                                    
             server.inject({
-                method: 'POST',
-                url: '/api/v1/tasks',
+                method: 'GET',
+                url: '/api/v1/tasks'
+            }, (response) => {
+
+                Code.expect(response.statusCode).to.equal(200);
+                Code.expect(response.result).to.be.an.array();
+                Code.expect(response.result[0]).to.be.an.object();
+                done();
+            });
+        });
+    });
+    
+    lab.test('test2', (done) => {
+        
+        ApiServer.getServer((server) => {                                    
+            server.inject({
+                method: 'GET',
+                url: '/api/v1/tasks/1'
+            }, (response) => {
+
+                Code.expect(response.statusCode).to.equal(200);
+                Code.expect(response.result).to.be.an.object();
+                done();
+            });
+        });
+    });
+    
+    lab.test('test2', (done) => {
+        
+        ApiServer.getServer((server) => {                                    
+            server.inject({
+                method: 'PUT',
+                url: '/api/v1/tasks/1',
                 payload: {
-                    "title": "task1",
+                    "title": "task5",
                     "description": "Needs to be done",
                     "status": false,
                 }
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);
+                Code.expect(response.result).to.equal([1]);
+                done();
+            });
+        });
+    });
+    
+    lab.test('test2', (done) => {
+        
+        ApiServer.getServer((server) => {                                    
+            server.inject({
+                method: 'DELETE',
+                url: '/api/v1/tasks/1'
+            }, (response) => {
+
+                Code.expect(response.statusCode).to.equal(200);
+                Code.expect(response.result).to.equal(1);
                 done();
             });
         });

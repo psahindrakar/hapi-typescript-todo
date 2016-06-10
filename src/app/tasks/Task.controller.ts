@@ -55,7 +55,9 @@ export default class TaskController {
                 Task.update(request.payload, {
                     where: {id: request.params['id']}
                 }).then((tasks) => {
-                    reply(tasks);
+                    Task.findById(request.params['id']).then((task) => {
+                       reply(task);
+                    });
                 });
             },
             tags: ['api'],

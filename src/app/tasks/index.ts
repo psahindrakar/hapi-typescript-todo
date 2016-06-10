@@ -17,10 +17,26 @@ class TaskPlugin {
             method: 'GET',
             path:'/tasks',
             config: taskController.getTasks()
-        }, {
+        },
+        {
+            method: 'GET',
+            path:'/tasks/{id}',
+            config: taskController.getTaskById()
+        },
+        {
             method: 'POST',
             path:'/tasks',
             config: taskController.createTask()
+        },
+        {
+            method: 'PUT',
+            path:'/tasks/{id}',
+            config: taskController.updateTask()
+        },
+        {
+            method: 'DELETE',
+            path:'/tasks/{id}',
+            config: taskController.removeTask()
         }]);
     }
     

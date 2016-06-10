@@ -6,7 +6,7 @@ import Manifest from './config/manifest';
 const Glue = require('glue');
 
 const composeOptions = {
-    relativeTo: __dirname + '/../src'
+    relativeTo: __dirname
 }
 
 Glue.compose(new Manifest().get("/"), composeOptions, function(err, server) {

@@ -51,7 +51,7 @@ gulp.task('test:unit', ['build'], function () {
 
 gulp.task('test:api', ['build'], function () {
     return gulp.src([testFunctionalFiles])
-      .pipe(lab());
+      .pipe(lab('--colors --coverage --verbose --timeout 0'));
 });
 
 gulp.task('default', ['nodemon', 'watch']);

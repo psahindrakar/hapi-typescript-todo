@@ -13,3 +13,10 @@ export const Id = {
 		id:	Joi.number().min(1).positive().required().default(1)
 	}
 }
+
+export const login = {
+	payload: Joi.object().keys({
+		email: Joi.string().email().required().default('saurabh@gmail.com').description('Regitstered Email').trim(),
+		password: Joi.string().required().default('bitroots5').description('Encrypted Password when made live').regex(/^[a-zA-Z0-9]{3,30}$/).trim()
+	})
+}

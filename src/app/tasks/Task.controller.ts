@@ -1,6 +1,8 @@
 import * as Hapi from 'hapi';
 import * as validationRules from './Task.validate'
 
+const jwt = require('jsonwebtoken');
+
 export default class TaskController {
         
     constructor() {
@@ -79,6 +81,25 @@ export default class TaskController {
             tags: ['api'],
             description: 'Get a list of active tasks',
             validate: validationRules.Id
+        }
+    }
+
+    public login() {
+        return {
+            handler: (request: Hapi.Request, reply: Hapi.IReply) => {
+                let email = request.payload.email;
+                let password = request.payload.password;
+                
+                if(email === "saurabh@gmail.com" && password === "bitroots5"){
+                    reply({token: jwt.sign({email: email}, 'BitrootsSoftware987654321!@#$%^&', { algorithm: 'HS256', expiresIn: "1h"})});
+                }else{
+                    reply("Invalid Error");
+                }
+            },
+            auth: false,
+            description : 'User is Authenticated by providing user credentials.',
+            validate: validationRules.login,
+            tags : ['api', 'tasks']
         }
     }
 }

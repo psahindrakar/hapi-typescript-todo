@@ -19,7 +19,14 @@ class AuthPlugin {
             
         //     return callback(null, false);
         // });
-        return callback(null, true);
+
+        if(decoded.email === "saurabh@gmail.com"){
+            return callback(null, true);    
+        }else{
+            return callback(null, false);
+        }
+
+        
     }
     
     private registerStrategy(server, next) {

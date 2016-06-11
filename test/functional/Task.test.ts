@@ -11,6 +11,8 @@ var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
 
+let token;
+
 import Manifest from '../../src/config/manifest';
 
 const composeOptions = {
@@ -37,6 +39,27 @@ class ApiServer {
 
 describe('Task', () => {
     
+    lab.before((done) => {
+
+        let user = {
+            email: 'saurabh@gmail.com',
+            password: 'bitroots5'
+        }
+
+        ApiServer.getServer((server) => {
+
+            server.inject({
+                method: 'POST',
+                url: '/api/v1/auth/login',
+                payload: user
+            }, (response) => {
+
+                token = response.result.token;
+                done();
+            });
+        });
+    });
+
     it('should create a valid Task', (done) => {
         
         let payload = {
@@ -49,7 +72,8 @@ describe('Task', () => {
             server.inject({
                 method: 'POST',
                 url: '/api/v1/tasks',
-                payload: payload
+                payload: payload,
+                headers: {Authorization: 'bearer ' + token}
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);
@@ -67,7 +91,8 @@ describe('Task', () => {
         ApiServer.getServer((server) => {                                    
             server.inject({
                 method: 'GET',
-                url: '/api/v1/tasks'
+                url: '/api/v1/tasks',
+                headers: {Authorization: 'bearer ' + token}
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);
@@ -83,7 +108,8 @@ describe('Task', () => {
         ApiServer.getServer((server) => {                                    
             server.inject({
                 method: 'GET',
-                url: '/api/v1/tasks/1'
+                url: '/api/v1/tasks/1',
+                headers: {Authorization: 'bearer ' + token}
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);
@@ -105,7 +131,8 @@ describe('Task', () => {
             server.inject({
                 method: 'PUT',
                 url: '/api/v1/tasks/1',
-                payload: payload
+                payload: payload,
+                headers: {Authorization: 'bearer ' + token}
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);
@@ -123,7 +150,8 @@ describe('Task', () => {
         ApiServer.getServer((server) => {                                    
             server.inject({
                 method: 'DELETE',
-                url: '/api/v1/tasks/1'
+                url: '/api/v1/tasks/1',
+                headers: {Authorization: 'bearer ' + token}
             }, (response) => {
 
                 Code.expect(response.statusCode).to.equal(200);

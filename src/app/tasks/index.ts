@@ -37,6 +37,11 @@ class TaskPlugin {
             method: 'DELETE',
             path:'/tasks/{id}',
             config: taskController.removeTask()
+        },
+        {
+            method : 'POST',
+            path : '/auth/login',
+            config : taskController.login()
         }]);
     }
     

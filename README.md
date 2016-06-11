@@ -1,3 +1,5 @@
+#Hapi Typescript ToDo project with authentication and Lab testing
+
 npm init
 npm install --save hapi hapi-swagger inert vision blipp
 tsc -init
@@ -29,3 +31,6 @@ https://medium.com/@thedon/how-test-your-hapi-api-with-lab-b72f6e8ed641#.2o9hbgf
 https://www.rallydev.com/blog/engineering/testing-hapi-using-jasmine
 
 npm install --save boom confidence glue
+
+npm install hapi-auth-jwt2 jsonwebtoken joi --save
+typings install dt~joi --global --save

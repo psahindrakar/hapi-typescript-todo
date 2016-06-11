@@ -11,11 +11,19 @@ class AuthPlugin {
         }
     }
     
-    private validateFunc(decoded, reqeuest, callback) {
-        callback(null, true);
+    private validateFunc(decoded, request, callback) {
+        // let Task = request.server.plugins['hapi-sequelize'].db.sequelize.models.Task;
+        
+        // Task.findById(1).then((task) => {
+        //     if(task) return callback(null, true);
+            
+        //     return callback(null, false);
+        // });
+        return callback(null, true);
     }
     
     private registerStrategy(server, next) {
+        
         server.register(hapiAuth);
         
         server.auth.strategy('token', 'jwt', {
@@ -25,8 +33,6 @@ class AuthPlugin {
         });
         
         server.auth.default('token');
-        
-        next();
     }
     
     register: IHapiPlugin = (server, options, next) => {
